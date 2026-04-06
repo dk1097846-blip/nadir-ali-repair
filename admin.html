@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<title>Admin Panel</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+margin:0;
+}
+
+header{
+background:#0a7a3d;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.owner{
+background:white;
+padding:15px;
+margin:20px;
+border-radius:10px;
+box-shadow:0 0 10px #ccc;
+text-align:center;
+}
+
+.container{
+width:90%;
+margin:auto;
+}
+
+.card{
+background:white;
+padding:15px;
+margin:10px;
+border-radius:8px;
+box-shadow:0 0 10px #ccc;
+}
+
+button{
+background:#0a7a3d;
+color:white;
+border:none;
+padding:8px;
+border-radius:5px;
+}
+
+</style>
+
+<script>
+
+function loadData(){
+
+let complaints=JSON.parse(localStorage.getItem("complaints"))||[];
+
+let html="";
+
+complaints.forEach(function(c){
+
+html+=`
+<div class="card">
+
+<b>Name:</b> ${c.name}<br>
+<b>Phone:</b> ${c.phone}<br>
+<b>Problem:</b> ${c.problem}<br>
+
+<a href="https://maps.google.com/?q=${c.lat},${c.long}" target="_blank">
+<button>View Location</button>
+</a>
+
+</div>
+`;
+
+});
+
+document.getElementById("data").innerHTML=html;
+
+}
+
+</script>
+
+</head>
+
+<body onload="loadData()">
+
+<header>
+
+<h1>Nadir Ali Khan AC & Refrigerator Repair</h1>
+
+</header>
+
+<div class="owner">
+
+<h2>Owner Information</h2>
+
+<p><b>Name:</b> Nadir Ali Khan</p>
+
+<p><b>Contact:</b> 03702450883</p>
+
+<p><b>Address:</b> Agra Taj Colony Karachi</p>
+
+</div>
+
+<div class="container">
+
+<h2>Customer Complaints</h2>
+
+<div id="data"></div>
+
+</div>
+
+</body>
+</html>

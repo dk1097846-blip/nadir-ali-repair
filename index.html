@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Nadir Ali Khan AC & Refrigerator Repair</title>
+
+<style>
+body{
+font-family:Arial;
+background:#f4f6f9;
+margin:0;
+}
+
+header{
+background:#0a7a3d;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.container{
+width:400px;
+margin:auto;
+background:white;
+padding:20px;
+margin-top:40px;
+border-radius:10px;
+box-shadow:0 0 10px #ccc;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin-top:10px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+width:100%;
+padding:10px;
+margin-top:10px;
+background:#0a7a3d;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+</style>
+
+<script>
+
+function getLocation(){
+
+navigator.geolocation.getCurrentPosition(function(pos){
+
+document.getElementById("lat").value=pos.coords.latitude;
+document.getElementById("long").value=pos.coords.longitude;
+
+});
+
+}
+
+function saveComplaint(){
+
+event.preventDefault();
+
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let address=document.getElementById("address").value;
+let problem=document.getElementById("problem").value;
+let lat=document.getElementById("lat").value;
+let long=document.getElementById("long").value;
+
+let data={
+name:name,
+phone:phone,
+address:address,
+problem:problem,
+lat:lat,
+long:long
+};
+
+let complaints=JSON.parse(localStorage.getItem("complaints"))||[];
+
+complaints.push(data);
+
+localStorage.setItem("complaints",JSON.stringify(complaints));
+
+alert("Complaint Submitted Successfully");
+
+document.getElementById("form").reset();
+
+}
+
+</script>
+
+</head>
+
+<body onload="getLocation()">
+
+<header>
+
+<h1>Nadir Ali Khan</h1>
+<p>AC & Refrigerator Repair Service</p>
+
+</header>
+
+<div class="container">
+
+<h2>Register Complaint</h2>
+
+<form id="form" onsubmit="saveComplaint()">
+
+<input type="text" id="name" placeholder="Customer Name" required>
+
+<input type="text" id="phone" placeholder="Phone Number" required>
+
+<input type="text" id="address" placeholder="Customer Address" required>
+
+<textarea id="problem" placeholder="Problem"></textarea>
+
+<input type="hidden" id="lat">
+<input type="hidden" id="long">
+
+<button type="submit">Submit Complaint</button>
+
+</form>
+
+</div>
+
+</body>
+</html>
+
+
+
+
